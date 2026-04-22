@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Pocket Edition - Mod APK Download</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #52a535; /* Minecraft Green */
+            --secondary: #3c8527;
+            --dark: #2c2c2c;
+            --success: #34A853;
+            --danger: #EA4335;
+            --text-dark: #202124;
+            --text-light: #5f6368;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Gaming/Minecraft Inspired Background */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                              url('https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+        }
+
+        /* Minecraft Dirt/Grass Style Top Bar */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, #52a535, #8b4513, #52a535, #8b4513);
+        }
+
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.5s ease; }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: scale(0.95); } 
+            to { opacity: 1; transform: scale(1); } 
+        }
+        
+        h1.main-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h2 { 
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333; 
+            margin-bottom: 1.2rem; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        h2 i { color: var(--primary); }
+
+        p {
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Minecraft Feature Card */
+        .feature-box {
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            border: 2px dashed var(--primary);
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #444;
+        }
+        .feature-item i { color: var(--primary); margin-right: 10px; }
+
+        /* Buttons */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button.opt-btn {
+            background: white;
+            color: #333;
+            border: 2px solid #ddd;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            text-align: left;
+            transition: 0.2s;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        button.opt-btn:hover {
+            border-color: var(--primary);
+            background-color: #f9fff6;
+            transform: translateX(5px);
+        }
+
+        button.main-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 4px 0px #3c8527;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+        
+        button.main-action:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        .progress-bar {
+            height: 10px;
+            flex-grow: 1;
+            background: #eee;
+            border-radius: 5px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: white;
+            text-align: center;
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="progress-container">
+        <span>START</span>
+        <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
+        <span>DOWNLOAD</span>
+    </div>
+
+    <div class="step active" id="step1">
+        <h1 class="main-title">Minecraft Mod APK Free Download</h1>
+        <p>Unlock all premium features, skins, and infinite resources for free. Follow the verification steps to get your download link.</p>
+        
+        <div class="feature-box">
+            <div class="feature-item"><i class="fas fa-check-circle"></i> God Mode & Unlocked Skins</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Anti-Ban Version 2026</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> High-Speed Download Portal</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> No Root Required</div>
+        </div>
+
+        <button class="main-action" onclick="nextStep(2)">
+            START DOWNLOAD PROCESS <i class="fas fa-download"></i>
+        </button>
+    </div>
+
+    <div class="step" id="step2">
+        <h2><i class="fas fa-mobile-alt"></i> Device Check</h2>
+        <p>Which operating system are you using to install Minecraft?</p>
+        <div class="options-container">
+            <button class="opt-btn" onclick="nextStep(3)"><span>Android Device</span><i class="fas fa-chevron-right"></i></button>
+            <button class="opt-btn" onclick="nextStep(3)"><span>iOS / iPadOS</span><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="step" id="step3">
+        <h2><i class="fas fa-gamepad"></i> Gaming Profile</h2>
+        <p>Have you played Minecraft Pocket Edition before?</p>
+        <div class="options-container">
+            <button class="opt-btn" onclick="nextStep(4)"><span>Yes, I'm a Pro</span><i class="fas fa-chevron-right"></i></button>
+            <button class="opt-btn" onclick="nextStep(4)"><span>No, I'm a Newbie</span><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="step" id="step4">
+        <h2><i class="fas fa-server"></i> Connecting to Server</h2>
+        <div class="loader"></div>
+        <p id="status-msg" style="font-weight:600;">Searching for available APK mirrors...</p>
+    </div>
+
+    <div class="step" id="step5">
+        <h2><i class="fas fa-robot"></i> Human Verification</h2>
+        <p>To prevent server abuse, please complete this simple math problem:</p>
+        <div style="background:#eee; padding: 15px; border-radius:10px; display:inline-block; margin-bottom:15px;">
+            <strong style="font-size:1.8rem;"> 9 + 6 = ?</strong>
+        </div>
+        <input type="number" id="mathAns" style="display:block; width:150px; margin: 0 auto 15px; padding:10px; font-size:1.2rem; text-align:center; border:2px solid var(--primary); border-radius:5px;">
+        <button class="main-action" onclick="checkBot()">
+            VERIFY & CONTINUE <i class="fas fa-user-check"></i>
+        </button>
+    </div>
+
+    <div class="step" id="step6">
+        <h2 style="color:var(--danger)"><i class="fas fa-exclamation-circle"></i> Final Step Required</h2>
+        <p>Your download is ready! To unlock the link, you must verify your identity on the next page.</p>
+        <div style="background:rgba(234, 67, 53, 0.1); color:var(--danger); padding:10px; border-radius:5px; font-size:0.85rem; font-weight:600; margin-bottom:15px;">
+            NOTE: Complete the offer with real details or the download will fail.
+        </div>
+        <button class="main-action" onclick="redirectToOffer()" style="background:var(--success); box-shadow: 0 4px 0px #276535;">
+            GET DOWNLOAD LINK NOW <i class="fas fa-link"></i>
+        </button>
+    </div>
+</div>
+
+<footer>
+    <div>&copy; 2026 Minecraft Mod Community Portal</div>
+    <div class="verified-badge"><i class="fas fa-shield-alt"></i> VirusFree & Scanned by McAfee</div>
+</footer>
+
+<script>
+    let currentStep = 1;
+    const totalSteps = 6;
+    const offerLink = "https://vhc-network.gleeze.com/click.php?aff=1&off=2195";
+
+    function nextStep(step) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+        document.getElementById('pFill').style.width = (step / totalSteps * 100) + "%";
+
+        if(step === 4) {
+            runServerCheck();
+        }
+    }
+
+    function runServerCheck() {
+        const msgs = [
+            "Locating Mod APK v1.20.x...",
+            "Checking region compatibility...",
+            "Generating unique download token...",
+            "Ready to Download!"
+        ];
+        let i = 0;
+        let interval = setInterval(() => {
+            document.getElementById('status-msg').innerText = msgs[i];
+            i++;
+            if(i >= msgs.length) {
+                clearInterval(interval);
+                setTimeout(() => nextStep(5), 500);
+            }
+        }, 1200);
+    }
+
+    function checkBot() {
+        const ans = document.getElementById('mathAns').value;
+        if(ans == "15") {
+            nextStep(6);
+        } else {
+            alert("Wrong answer! Try again.");
+        }
+    }
+
+    function redirectToOffer() {
+        window.location.href = offerLink;
+    }
+</script>
+
+</body>
+</html>
