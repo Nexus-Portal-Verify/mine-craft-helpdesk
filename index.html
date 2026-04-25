@@ -17,21 +17,15 @@
             --text-light: #5f6368;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Poppins', sans-serif;
-            /* Gaming/Minecraft Inspired Background */
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
                               url('https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            margin: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -55,7 +49,6 @@
             border: 3px solid var(--primary);
         }
 
-        /* Minecraft Dirt/Grass Style Top Bar */
         .container::before {
             content: '';
             position: absolute;
@@ -82,27 +75,8 @@
             text-transform: uppercase;
         }
 
-        h2 { 
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #333; 
-            margin-bottom: 1.2rem; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        h2 i { color: var(--primary); }
+        h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        p {
-            color: var(--text-light);
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        /* Minecraft Feature Card */
         .feature-box {
             background: #f0f0f0;
             border-radius: 10px;
@@ -111,43 +85,8 @@
             margin-bottom: 1.5rem;
             border: 2px dashed var(--primary);
         }
-        .feature-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: #444;
-        }
+        .feature-item { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9rem; color: #444; }
         .feature-item i { color: var(--primary); margin-right: 10px; }
-
-        /* Buttons */
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        button.opt-btn {
-            background: white;
-            color: #333;
-            border: 2px solid #ddd;
-            padding: 14px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            width: 100%;
-            text-align: left;
-            transition: 0.2s;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        button.opt-btn:hover {
-            border-color: var(--primary);
-            background-color: #f9fff6;
-            transform: translateX(5px);
-        }
 
         button.main-action {
             background: var(--primary);
@@ -167,190 +106,129 @@
             gap: 10px;
             text-transform: uppercase;
         }
-        
-        button.main-action:active {
-            transform: translateY(4px);
-            box-shadow: none;
+
+        button.opt-btn {
+            background: white; border: 2px solid #ddd; padding: 14px 20px; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; text-align: left; transition: 0.2s; font-weight: 600; display: flex; justify-content: space-between; margin-bottom: 10px;
         }
+        button.opt-btn:hover { border-color: var(--primary); background-color: #f9fff6; transform: translateX(5px); }
 
         /* Progress Bar */
-        .progress-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: var(--secondary);
-        }
-        .progress-bar {
-            height: 10px;
-            flex-grow: 1;
-            background: #eee;
-            border-radius: 5px;
-            margin: 0 10px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--primary);
-            width: 0%;
-            transition: width 0.4s ease;
-        }
+        .progress-bar { height: 10px; background: #eee; border-radius: 5px; margin: 15px 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary); width: 16.6%; transition: width 0.4s ease; }
 
-        .loader {
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid var(--primary);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
+        .loader { border: 6px solid #f3f3f3; border-top: 6px solid var(--primary); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        footer {
-            margin-top: 2rem;
-            font-size: 0.75rem;
-            color: white;
-            text-align: center;
-        }
+        #timer { color: var(--danger); font-weight: bold; font-size: 1.1rem; }
 
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(255,255,255,0.2);
-            padding: 4px 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
+        footer { margin-top: 2rem; font-size: 0.75rem; color: white; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="progress-container">
-        <span>START</span>
-        <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
-        <span>DOWNLOAD</span>
-    </div>
+    <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
 
     <div class="step active" id="step1">
-        <h1 class="main-title">Minecraft Mod APK Free Download</h1>
-        <p>Unlock all premium features, skins, and infinite resources for free. Follow the verification steps to get your download link.</p>
-        
+        <h1 class="main-title">Minecraft PE Mod APK</h1>
+        <p>Get the latest 2026 Anti-Ban version with all skins unlocked.</p>
         <div class="feature-box">
-            <div class="feature-item"><i class="fas fa-check-circle"></i> God Mode & Unlocked Skins</div>
-            <div class="feature-item"><i class="fas fa-check-circle"></i> Anti-Ban Version 2026</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Premium Skins Unlocked</div>
             <div class="feature-item"><i class="fas fa-check-circle"></i> High-Speed Download Portal</div>
-            <div class="feature-item"><i class="fas fa-check-circle"></i> No Root Required</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> No Root / No Jailbreak</div>
         </div>
-
-        <button class="main-action" onclick="nextStep(2)">
-            START DOWNLOAD PROCESS <i class="fas fa-download"></i>
-        </button>
+        <button class="main-action" onclick="nextStep(2)">START DOWNLOAD <i class="fas fa-download"></i></button>
     </div>
 
     <div class="step" id="step2">
-        <h2><i class="fas fa-mobile-alt"></i> Device Check</h2>
-        <p>Which operating system are you using to install Minecraft?</p>
-        <div class="options-container">
-            <button class="opt-btn" onclick="nextStep(3)"><span>Android Device</span><i class="fas fa-chevron-right"></i></button>
-            <button class="opt-btn" onclick="nextStep(3)"><span>iOS / iPadOS</span><i class="fas fa-chevron-right"></i></button>
-        </div>
+        <h2>Select Device</h2>
+        <button class="opt-btn" onclick="nextStep(3)"><span>Android Device</span><i class="fas fa-chevron-right"></i></button>
+        <button class="opt-btn" onclick="nextStep(3)"><span>iOS / iPadOS</span><i class="fas fa-chevron-right"></i></button>
     </div>
 
     <div class="step" id="step3">
-        <h2><i class="fas fa-gamepad"></i> Gaming Profile</h2>
-        <p>Have you played Minecraft Pocket Edition before?</p>
-        <div class="options-container">
-            <button class="opt-btn" onclick="nextStep(4)"><span>Yes, I'm a Pro</span><i class="fas fa-chevron-right"></i></button>
-            <button class="opt-btn" onclick="nextStep(4)"><span>No, I'm a Newbie</span><i class="fas fa-chevron-right"></i></button>
-        </div>
+        <h2>Server Connection</h2>
+        <div class="loader"></div>
+        <p id="status-msg">Searching for APK mirrors...</p>
     </div>
 
     <div class="step" id="step4">
-        <h2><i class="fas fa-server"></i> Connecting to Server</h2>
-        <div class="loader"></div>
-        <p id="status-msg" style="font-weight:600;">Searching for available APK mirrors...</p>
+        <h2>Human Verification</h2>
+        <p>Solve this simple math to continue:</p>
+        <div style="background:#eee; padding: 15px; border-radius:10px; margin-bottom:15px; font-size: 1.5rem; font-weight: bold;">9 + 6 = ?</div>
+        <input type="number" id="mathAns" style="width:100px; padding:10px; text-align:center; border:2px solid var(--primary); margin-bottom:15px;">
+        <button class="main-action" onclick="checkBot()">VERIFY NOW</button>
     </div>
 
     <div class="step" id="step5">
-        <h2><i class="fas fa-robot"></i> Human Verification</h2>
-        <p>To prevent server abuse, please complete this simple math problem:</p>
-        <div style="background:#eee; padding: 15px; border-radius:10px; display:inline-block; margin-bottom:15px;">
-            <strong style="font-size:1.8rem;"> 9 + 6 = ?</strong>
-        </div>
-        <input type="number" id="mathAns" style="display:block; width:150px; margin: 0 auto 15px; padding:10px; font-size:1.2rem; text-align:center; border:2px solid var(--primary); border-radius:5px;">
-        <button class="main-action" onclick="checkBot()">
-            VERIFY & CONTINUE <i class="fas fa-user-check"></i>
-        </button>
-    </div>
-
-    <div class="step" id="step6">
-        <h2 style="color:var(--danger)"><i class="fas fa-exclamation-circle"></i> Final Step Required</h2>
-        <p>Your download is ready! To unlock the link, you must verify your identity on the next page.</p>
-        <div style="background:rgba(234, 67, 53, 0.1); color:var(--danger); padding:10px; border-radius:5px; font-size:0.85rem; font-weight:600; margin-bottom:15px;">
-            NOTE: Complete the offer with real details or the download will fail.
+        <h2 style="color:var(--danger)">Final Step!</h2>
+        <p>Your download link expires in:</p>
+        <div id="timer">03:00</div>
+        <div style="background:rgba(234, 67, 53, 0.1); color:var(--danger); padding:10px; border-radius:5px; margin: 15px 0; font-size: 0.85rem;">
+            Complete one offer below to start your download immediately.
         </div>
         <button class="main-action" onclick="redirectToOffer()" style="background:var(--success); box-shadow: 0 4px 0px #276535;">
-            GET DOWNLOAD LINK NOW <i class="fas fa-link"></i>
+            GET LINK NOW <i class="fas fa-link"></i>
         </button>
     </div>
 </div>
 
 <footer>
-    <div>&copy; 2026 Minecraft Mod Community Portal</div>
-    <div class="verified-badge"><i class="fas fa-shield-alt"></i> VirusFree & Scanned by McAfee</div>
+    &copy; 2026 Minecraft Mod Portal | Safe & Verified
 </footer>
 
 <script>
     let currentStep = 1;
-    const totalSteps = 6;
-    const offerLink = "https://vhc-network.gleeze.com/click.php?aff=1&off=2197";
+    // මෙතනට උඹේ CPAGrip Direct Link එක දාපන්
+    const offerLink = "https://singingfiles.com/1857116/FRET46AE2"; 
 
     function nextStep(step) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('step' + step).classList.add('active');
-        document.getElementById('pFill').style.width = (step / totalSteps * 100) + "%";
+        document.getElementById('pFill').style.width = (step / 5 * 100) + "%";
 
-        if(step === 4) {
-            runServerCheck();
-        }
+        if(step === 3) runServerCheck();
+        if(step === 5) startTimer(180);
     }
 
     function runServerCheck() {
-        const msgs = [
-            "Locating Mod APK v1.20.x...",
-            "Checking region compatibility...",
-            "Generating unique download token...",
-            "Ready to Download!"
-        ];
+        const msgs = ["Checking Compatibility...", "Generating Token...", "APK Found!"];
         let i = 0;
         let interval = setInterval(() => {
-            document.getElementById('status-msg').innerText = msgs[i];
-            i++;
+            document.getElementById('status-msg').innerText = msgs[i++];
             if(i >= msgs.length) {
                 clearInterval(interval);
-                setTimeout(() => nextStep(5), 500);
+                setTimeout(() => nextStep(4), 800);
             }
         }, 1200);
     }
 
     function checkBot() {
-        const ans = document.getElementById('mathAns').value;
-        if(ans == "15") {
-            nextStep(6);
-        } else {
-            alert("Wrong answer! Try again.");
-        }
+        if(document.getElementById('mathAns').value == "15") nextStep(5);
+        else alert("Wrong Answer!");
+    }
+
+    function startTimer(duration) {
+        let timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            document.getElementById('timer').textContent = minutes + ":" + seconds;
+            if (--timer < 0) timer = 0;
+        }, 1000);
     }
 
     function redirectToOffer() {
-        window.location.href = offerLink;
+        // No-Referrer ආරක්ෂාව සහිතව යැවීම
+        const link = document.createElement('a');
+        link.href = offerLink;
+        link.rel = 'noreferrer noopener';
+        link.target = '_self'; 
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 </script>
-
 </body>
 </html>
