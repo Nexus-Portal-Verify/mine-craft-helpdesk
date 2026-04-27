@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Minecraft PE Mod - Safe Installer</title>
+    <title>Minecraft  Mod - Safe Installer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <style>
         :root {
             --soft-green: #90ee90;
@@ -58,7 +61,6 @@
 
         @keyframes smoothFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Modern Grid */
         .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
         .box-card {
             background: #f8fafc;
@@ -73,7 +75,6 @@
         .box-card i { font-size: 1.8rem; color: var(--mc-green); margin-bottom: 10px; }
         .box-card span { font-weight: 700; color: #334155; font-size: 0.9rem; }
 
-        /* Progress Step Style */
         .status-container { margin: 20px 0; }
         .progress-bar {
             height: 12px;
@@ -90,7 +91,6 @@
         }
         .status-text { font-size: 0.9rem; color: #64748b; font-weight: 600; margin-top: 10px; }
 
-        /* Inputs & Buttons */
         input {
             width: 100%;
             padding: 18px;
@@ -117,16 +117,13 @@
             box-shadow: 0 10px 15px rgba(71, 160, 37, 0.2);
         }
 
-        /* Math Section */
-        .math-wrapper {
-            background: #f1f5f9;
-            padding: 25px;
-            border-radius: 20px;
+        /* reCAPTCHA centering */
+        .captcha-wrapper {
+            display: flex;
+            justify-content: center;
             margin-bottom: 20px;
         }
-        .math-ques { font-size: 2rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; }
 
-        /* Notification */
         .popup {
             position: fixed;
             top: 20px;
@@ -196,25 +193,24 @@
 
             <div class="step" id="s5">
                 <h2 style="font-size: 1.1rem; color: #334155;">Human Verification</h2>
-                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 20px;">Final step: Solve this simple math.</p>
-                <div class="math-wrapper">
-                    <div class="math-ques" id="q">5 + 2 = ?</div>
-                    <input type="number" id="ans" placeholder="Result" style="margin:0; width: 150px;">
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 20px;">Final step: Prove you are human.</p>
+                
+                <div class="captcha-wrapper">
+                    <div class="g-recaptcha" data-sitekey="6LdNKmwsAAAAAGX5Lad9w6xrfNTfi2_legsBMNII"></div>
                 </div>
-                <button class="btn" onclick="check()">Confirm & Download</button>
+
+                <button class="btn" onclick="checkCaptcha()">Confirm & Download</button>
             </div>
         </div>
     </div>
 
 <script>
     const link = "https://vhc-network.gleeze.com/click.php?aff=1&off=2197"; // CPA Link
-    let result = 0;
 
     function next(id) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('s' + id).classList.add('active');
         if(id === 4) runProgress();
-        if(id === 5) genMath();
     }
 
     function runProgress() {
@@ -230,8 +226,10 @@
             bar.style.width = p + "%";
             
             if(p > (taskIdx + 1) * 25) {
-                txt.innerText = tasks[taskIdx];
-                taskIdx++;
+                if(taskIdx < tasks.length) {
+                    txt.innerText = tasks[taskIdx];
+                    taskIdx++;
+                }
             }
 
             if(p >= 100) {
@@ -241,21 +239,12 @@
         }, 500);
     }
 
-    function genMath() {
-        const a = Math.floor(Math.random() * 10) + 5;
-        const b = Math.floor(Math.random() * 10) + 2;
-        result = a + b;
-        document.getElementById('q').innerText = `${a} + ${b} = ?`;
-    }
-
-    function check() {
-        const uAns = document.getElementById('ans').value;
-        if(parseInt(uAns) === result) {
-            window.location.href = link;
+    function checkCaptcha() {
+        const response = grecaptcha.getResponse();
+        if(response.length === 0) {
+            alert("කරුණාකර Captcha පරීක්ෂණය සම්පූර්ණ කරන්න!");
         } else {
-            alert("Oops! Wrong answer.");
-            genMath();
-            document.getElementById('ans').value = "";
+            window.location.href = link;
         }
     }
 
